@@ -1,30 +1,22 @@
-{%set name = "agate-stats" %}
-{%set version = "0.4.0" %}
-{%set compress_type = "tar.gz" %}
-{%set hash_type = "sha256" %}
-{%set hash_val = "f1c68a99ffe1dfe2e71a0b9812e374bf5b3768a69ed340bfdec5951c2a3e901e" %}
-{%set build_num = "0" %}
+{% set version = "0.4.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  fn: {{ name }}-{{ version }}.{{ compress_type }}
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.{{ compress_type }}
-  {{ hash_type }}: {{ hash_val }}
+  url: https://pypi.io/packages/source/a/agate-stats/agate-stats-{{ version }}.tar.gz
+  sha256: f1c68a99ffe1dfe2e71a0b9812e374bf5b3768a69ed340bfdec5951c2a3e901e
 
 build:
+  number: 0
   noarch: python
-  number: {{ build_num }}
   script: python -m pip install --no-deps --ignore-installed .
 
 requirements:
   host:
-    - pip
     - python
-    - setuptools
-
+    - pip
   run:
     - python
     - six >=1.6.1
