@@ -1,38 +1,40 @@
+{% set name = "agate-stats" %}
 {% set version = "0.4.1" %}
 
 package:
-  name: agate-stats
+  name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/a/agate-stats/agate-stats-{{ version }}.tar.gz
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/agate-stats-{{ version }}.tar.gz
   sha256: 9e5455d57d2bb0f24a4e48dce1332f2f6e0cd78e519aa6da0cd329880a52193e
 
 build:
-  number: 0
   noarch: python
-  script: {{ PYTHON }} -m pip install . --no-deps -vv
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
 
 requirements:
   host:
-    - python
+    - python >=3.6
     - pip
   run:
-    - python
-    - six >=1.6.1
+    - python >=3.6
     - agate >=1.5.0
 
 test:
   imports:
     - agatestats
+  commands:
+    - pip check
+  requires:
+    - pip
 
 about:
-  home: http://agate-stats.readthedocs.org/
+  home: https://agate-stats.readthedocs.org/
+  summary: agate-stats adds additional statistical methods to agate.
   license: MIT
   license_file: COPYING
-  license_family: MIT
-  summary: 'agate-stats adds additional statistical methods to agate.'
-  # license_file: COPYING - No MANIFEST.in - see https://github.com/wireservice/agate-stats/pull/17
   doc_url: http://agate-stats.readthedocs.org/
   dev_url: https://github.com/wireservice/agate-stats
 
